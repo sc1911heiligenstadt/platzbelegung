@@ -74,7 +74,6 @@ function belegungsListe() { return appData[bcfg().belegKey]; }
 function currentMeta() { return appData[bcfg().metaKey] || {}; }
 function ortById(id) { return ortsListe().find((p) => p.id === id) || null; }
 function kategorieById(id) { return appData.kategorien.find((k) => k.id === id) || null; }
-function ortName(id) { const p = ortById(id); return p ? p.name : id; }
 function tagName(id) { const t = TAGE.find((x) => x.id === id); return t ? t.name : id; }
 function tagIndex(id) { return TAGE.findIndex((x) => x.id === id); }
 function ortIndex(id) { return ortsListe().findIndex((p) => p.id === id); }
