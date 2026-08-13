@@ -62,6 +62,19 @@ const DEFAULT_KATEGORIEN = [
 
 const APP_CHANGELOG = [
   {
+    version: "1.1",
+    groups: [
+      {
+        title: "Mannschaften kommen jetzt aus der einen Vereinsliste",
+        items: [
+          "Das Feld „Mannschaft / Kürzel“ schlägt beim Tippen die echten Mannschaften des Vereins vor — dieselbe Liste, die in der Tools-Übersicht gepflegt wird.",
+          "Damit steht dieselbe Mannschaft überall gleich geschrieben im Plan, statt einmal als „D1“ und einmal als „D-Junioren“.",
+          "Ein eigener Eintrag bleibt möglich: Kürzel wie „FZG“ oder „1.MA“ und Kombinationen wie „D1/2“ lassen sich weiterhin frei eintippen."
+        ]
+      }
+    ]
+  },
+  {
     version: "1.0",
     groups: [
       {

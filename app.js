@@ -966,6 +966,20 @@ function showConnectScreen(errorMsg) {
   document.getElementById("cloud-error").textContent = errorMsg ? "Fehler: " + errorMsg : "";
 }
 
+// Vorschläge fürs Feld „Mannschaft / Kürzel" aus der zentralen Vereinsliste.
+let vereinsMannschaften = [];
+
+// Füllt die datalist am Namensfeld. ⚠️ Eine datalist SCHLÄGT nichts vor, was
+// nicht drinsteht, verbietet aber auch nichts — genau das ist hier gewollt:
+// die echten Mannschaften zur Auswahl, Kürzel wie „FZG" weiter frei tippbar.
+function renderVereinsListe() {
+  const dl = document.getElementById("vereins-mannschaften");
+  if (!dl) return;
+  dl.innerHTML = vereinsMannschaften
+    .map((m) => `<option value="${escapeHtml(m.kurz)}">${escapeHtml(m.lang)}${m.liga ? " · " + escapeHtml(m.liga) : ""}</option>`)
+    .join("");
+}
+
 async function startApp() {
   document.getElementById("connect-screen").style.display = "none";
   document.getElementById("app-shell").style.display = "";
@@ -975,6 +989,11 @@ async function startApp() {
   } catch (_) { /* best effort */ }
   renderHeaderUser();
   applyAdminVisibility();
+  // Kommt zum Schluss: die Liste füllt nur ein Vorschlagsfeld, der Wochenplan
+  // ist ohne sie schon vollständig bedienbar. Ein zweiter Roundtrip soll den
+  // ersten Aufbau nicht aufhalten.
+  vereinsMannschaften = await fetchVereinsMannschaften();
+  renderVereinsListe();
 }
 
 async function init() {
