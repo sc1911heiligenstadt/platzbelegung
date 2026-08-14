@@ -4,7 +4,7 @@
 #
 # Aufruf:  powershell -File tools\excel-to-seed.ps1 [-Xlsx <pfad>] [-Out <pfad>]
 param(
-  [string]$Xlsx = "C:\Users\Michel Brunner\Desktop\Endversion_Platzbelegungsplan 26-27_3_ab 15-06-26.xlsx",
+  [string]$Xlsx = (Join-Path $env:USERPROFILE "Desktop\Endversion_Platzbelegungsplan 26-27_3_ab 15-06-26.xlsx"),
   [string]$Out  = "E:\platzbelegung\platzbelegung-seed.json"
 )
 

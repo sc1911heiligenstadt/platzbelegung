@@ -20,7 +20,7 @@
 #
 # Aufruf:  powershell -File tools\hallen-excel-to-seed.ps1 [-Xlsx <pfad>] [-Out <pfad>]
 param(
-  [string]$Xlsx = "C:\Users\Michel Brunner\Nextcloud\05_Nachwuchsbereich\01_Leitung\01_Platz- und Hallenbelegungsplan\Entwurf_Hallen Plan_2026-27_CP.xlsx",
+  [string]$Xlsx = (Join-Path $env:USERPROFILE "Nextcloud\05_Nachwuchsbereich\01_Leitung\01_Platz- und Hallenbelegungsplan\Entwurf_Hallen Plan_2026-27_CP.xlsx"),
   [string]$Out  = "E:\platzbelegung\hallenbelegung-seed.json"
 )
 
