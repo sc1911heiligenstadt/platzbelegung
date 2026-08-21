@@ -385,7 +385,7 @@ function baueListenPdf(list) {
     doc.setPage(i);
     doc.setFontSize(8);
     doc.setTextColor(130);
-    doc.text(cfg.name + " · 1. SC 1911 e.V. Heilbad Heiligenstadt", 14, 289);
+    doc.text(cfg.name + " · 1. SC 1911 Heiligenstadt e.V.", 14, 289);
     doc.text(`Seite ${i} von ${seiten}`, 196, 289, { align: "right" });
   }
 
