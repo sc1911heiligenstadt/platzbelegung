@@ -62,6 +62,17 @@ const DEFAULT_KATEGORIEN = [
 
 const APP_CHANGELOG = [
   {
+    version: "1.3",
+    groups: [
+      {
+        title: "Der richtige Vereinsname",
+        items: [
+          "Der Wochenplan als PDF trug in der Fußzeile „1. SC 1911 e.V. Heilbad Heiligenstadt“. Richtig ist „1. SC 1911 Heiligenstadt e.V.“ — neue PDFs tragen den richtigen Namen. Schon erzeugte PDFs ändern sich nicht."
+        ]
+      }
+    ]
+  },
+  {
     version: "1.2",
     groups: [
       {
