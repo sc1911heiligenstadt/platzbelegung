@@ -62,78 +62,6 @@ const DEFAULT_KATEGORIEN = [
 
 const APP_CHANGELOG = [
   {
-    version: "1.6",
-    groups: [
-      {
-        title: "Der Reiter „Info“ erklärt jetzt, was die App wirklich tut",
-        items: [
-          "Dort stand bisher ein einzelner Satz. Jetzt steht da, wofür die einzelnen Reiter da sind, was die App mit den Eingaben macht und wo etwas anderes hingehört.",
-          "Am Funktionsumfang ändert sich nichts — nur an der Beschreibung."
-        ]
-      }
-    ]
-  },
-  {
-    version: "1.5",
-    groups: [
-      {
-        title: "Beim Sitzungsende wird auch alles neben der Seite geräumt",
-        items: [
-          "Beim Sitzungsende wurde die Seite bereits geleert. Der Belegungs-Dialog und der Sicherungs-Dialog stehen aber daneben und blieben mit den Einträgen stehen. Jetzt werden sie mitgeleert.",
-          "Der Hinweis erscheint außerdem an jeder Stelle, an der die Anmeldung wegfällt — vorher nur bei einem Teil der Wege."
-        ]
-      }
-    ]
-  },
-  {
-    version: "1.4",
-    groups: [
-      {
-        title: "Beim Abmelden bleibt nichts stehen",
-        items: [
-          "Läuft die Anmeldung ab, während die App offen ist — zum Beispiel weil ein Speichern nach längerer Pause fehlschlägt —, erscheint wie bisher der Hinweis „bitte neu anmelden“.",
-          "Neu ist: der Bildschirm dahinter wird jetzt auch geleert. Vorher wurde er nur unsichtbar gemacht, und alles Angezeigte blieb im Browser stehen — sichtbar für jeden, der sich an denselben Rechner setzt und nachschaut.",
-          "Für dich ändert sich nichts: der Weg zurück war schon immer ein Neuladen der Seite."
-        ]
-      }
-    ]
-  },
-  {
-    version: "1.3",
-    groups: [
-      {
-        title: "Der richtige Vereinsname",
-        items: [
-          "Der Wochenplan als PDF trug in der Fußzeile „1. SC 1911 e.V. Heilbad Heiligenstadt“. Richtig ist „1. SC 1911 Heiligenstadt e.V.“ — neue PDFs tragen den richtigen Namen. Schon erzeugte PDFs ändern sich nicht."
-        ]
-      }
-    ]
-  },
-  {
-    version: "1.2",
-    groups: [
-      {
-        title: "Am Handy",
-        items: [
-          "Bisher brach die Reiterleiste selbst um, die rechte Reiter-Gruppe darin aber nicht: Sie rutschte als ein Stück in die zweite Zeile und lief dort weiter über den rechten Rand hinaus. Jetzt bricht auch sie um, sobald sie zu breit wird. Zu sehen ist das nur, wenn genug Reiter nebeneinanderstehen — bis dahin sieht alles aus wie bisher."
-        ]
-      }
-    ]
-  },
-  {
-    version: "1.1",
-    groups: [
-      {
-        title: "Mannschaften kommen jetzt aus der einen Vereinsliste",
-        items: [
-          "Das Feld „Mannschaft / Kürzel“ schlägt beim Tippen die echten Mannschaften des Vereins vor — dieselbe Liste, die in der Tools-Übersicht gepflegt wird.",
-          "Damit steht dieselbe Mannschaft überall gleich geschrieben im Plan, statt einmal als „D1“ und einmal als „D-Junioren“.",
-          "Ein eigener Eintrag bleibt möglich: Kürzel wie „FZG“ oder „1.MA“ und Kombinationen wie „D1/2“ lassen sich weiterhin frei eintippen."
-        ]
-      }
-    ]
-  },
-  {
     version: "1.0",
     groups: [
       {
@@ -143,41 +71,43 @@ const APP_CHANGELOG = [
           "Wochenplan als Gitter aus Zeit und Platz beziehungsweise Halle, von Montag bis Samstag, farblich nach Kategorie.",
           "Terminliste mit Filter nach Tag, Standort, Kategorie und freier Textsuche — die praktischere Ansicht auf dem Handy.",
           "Der Standort-Filter trennt den Hauptplatz von den Außenstandorten.",
-          "Ein Klick auf eine Belegung — im Gitter wie in der Liste — zeigt alle Angaben samt Ansprechpartner und Notiz. Das steht auch Nutzern ohne Bearbeiten-Recht offen."
+          "Ein Klick auf eine Belegung — im Gitter wie in der Liste — zeigt alle Angaben samt Ansprechpartner und Notiz. Das steht auch Nutzern ohne Bearbeiten-Recht offen.",
+          "Über der Woche stehen Saison und Gültig-ab-Datum des gerade geladenen Plans."
         ]
       },
       {
         title: "Belegungen pflegen",
         items: [
           "Anlegen, ändern und löschen über ein Formular mit Tag, Platz oder Halle, Start und Ende, Kürzel, Ansprechpartner, Kategorie und Notiz.",
-          "Überschneidet sich die Zeit mit einer bestehenden Belegung, warnt die App.",
+          "Überschneidet sich die Zeit mit einer bestehenden Belegung, warnt die App und fragt nach, statt stillschweigend zu speichern.",
           "Ein Tippen auf ein freies Feld im Gitter legt direkt eine Belegung für diesen Platz und diese Zeit an.",
-          "Bestehende Belegungen lassen sich im Gitter auf ein freies Feld ziehen."
+          "Bestehende Belegungen lassen sich im Gitter auf ein freies Feld ziehen. Ist das Ziel schon belegt, lehnt die App den Zug ab."
         ]
       },
       {
-        title: "Wer darf was",
+        title: "Mannschaften aus der einen Vereinsliste",
         items: [
-          "Sehen: Gitter, Liste und alle Angaben einer Belegung, schreibgeschützt.",
-          "Bearbeiten: Belegungen anlegen, ändern, löschen und verschieben. Dazu der Ausdruck der Terminliste.",
-          "Administrieren: zusätzlich Datei-Import und Sicherungen im Reiter „Einstellungen“.",
-          "Der Reiter „Info“ ist für alle sichtbar."
+          "Das Feld „Mannschaft / Kürzel“ schlägt beim Tippen die echten Mannschaften des Vereins vor — dieselbe Liste, die in der Tools-Übersicht gepflegt wird.",
+          "Damit steht dieselbe Mannschaft überall gleich geschrieben im Plan, statt einmal als „D1“ und einmal als „D-Junioren“.",
+          "Ein eigener Eintrag bleibt möglich: Kürzel wie „FZG“ oder „1.MA“ und Kombinationen wie „D1/2“ lassen sich weiterhin frei eintippen."
         ]
       },
       {
-        title: "Ausdruck",
+        title: "Liste als PDF",
         items: [
-          "Die Terminliste lässt sich ausdrucken oder als PDF sichern — genau in dem Umfang, den der eingestellte Filter gerade zeigt.",
-          "Gegliedert nach Wochentagen, mit den Farben der Kategorien."
+          "Die Terminliste lässt sich als PDF sichern — genau in dem Umfang, den der eingestellte Filter gerade zeigt; welcher Filter das war, steht als Untertitel darin.",
+          "Gegliedert nach Wochentagen, mit den Farben der Kategorien, mit dem Vereinsnamen in der Fußzeile.",
+          "Der Dateiname trägt Bereich, gewählten Tag und das Datum, etwa „Platzbelegung_Montag_2026-07-23.pdf“."
         ]
       },
       {
-        title: "Sicherungen",
+        title: "Sicherungen und Import",
         items: [
           "Im Reiter „Einstellungen“ lassen sich bis zu 10 Sicherungen anlegen. Jede enthält den vollständigen Stand beider Bereiche und kann mit einem Kommentar versehen werden.",
           "Jeder gesicherte Stand lässt sich per Knopfdruck zurückholen. Die Liste zeigt Zeitpunkt, wer gesichert hat, den Kommentar und die Zahl der enthaltenen Belegungen.",
           "Vor einem Import und vor dem Zurückholen legt die App von sich aus einen Sicherungspunkt an — das sind die beiden Momente, in denen viel auf einmal überschrieben wird.",
-          "Es wird nie eine Sicherung von selbst gelöscht. Sind alle 10 Plätze belegt, sagt die App das und wartet, bis eine von Hand entfernt wurde."
+          "Es wird nie eine Sicherung von selbst gelöscht. Sind alle 10 Plätze belegt, sagt die App das und wartet, bis eine von Hand entfernt wurde.",
+          "Ein bestehender Excel-Plan lässt sich je Bereich einmalig als Datei einlesen. Sind schon Belegungen erfasst, fragt die App ausdrücklich nach, bevor sie sie ersetzt."
         ]
       },
       {
@@ -189,7 +119,23 @@ const APP_CHANGELOG = [
         ]
       },
       {
-        title: "Daten & Speicherung",
+        title: "Wer darf was",
+        items: [
+          "Sehen: Gitter, Liste und alle Angaben einer Belegung, schreibgeschützt — dazu das PDF der gefilterten Liste.",
+          "Bearbeiten: Belegungen anlegen, ändern, löschen und verschieben.",
+          "Administrieren: zusätzlich Datei-Import und Sicherungen im Reiter „Einstellungen“.",
+          "Der Reiter „Info“ steht jedem angemeldeten Nutzer offen.",
+          "Fällt die Anmeldung weg, während die App offen ist, räumt sie den Bildschirm samt der Dialoge daneben, statt die Belegungen im Hintergrund lesbar zu lassen."
+        ]
+      },
+      {
+        title: "Nicht zu verwechseln",
+        items: [
+          "Hier stehen die eigenen Trainingszeiten des Vereins. Der Antrag auf Nutzung einer Halle beim Landkreis läuft über die Raumnutzung — anderes Werkzeug, anderer Zweck."
+        ]
+      },
+      {
+        title: "Daten und Speicherung",
         items: [
           "Gespeichert wird in der Vereins-Nextcloud über die zentrale Anmeldung der Tools-Übersicht — ein eigenes Passwort braucht es nicht.",
           "Ändern zwei Geräte gleichzeitig denselben Stand, erkennt die App das, lädt den fremden Stand nach und sagt Bescheid."
