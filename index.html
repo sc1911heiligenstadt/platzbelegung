@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🏟️ Platzbelegung</title>
+<meta name="theme-color" content="#1a56a0" />
+<link rel="stylesheet" href="style.css?v=1.0" />
+</head>
+<body>
+
+  <div class="connect-screen" id="connect-screen">
+    <div class="card">
+      <h2>🏟️ Platzbelegung</h2>
+      <p id="connect-message">Bitte über die Tools-Übersicht anmelden, um den Platzbelegungsplan zu sehen.</p>
+      <div class="btn-row">
+        <a class="btn" href="https://sc1911heiligenstadt.github.io/ToolsUebersicht/">Zur Tools-Übersicht</a>
+      </div>
+      <p class="muted" id="cloud-error" style="margin-top:14px;"></p>
+    </div>
+  </div>
+
+  <div id="app-shell" style="display:none;">
+    <header>
+      <h1>🏟️ Platzbelegung</h1>
+      <a href="https://sc1911heiligenstadt.github.io/ToolsUebersicht/" class="back-to-dashboard">← Zurück zum Dashboard</a>
+      <div class="header-right">
+        <span class="header-status" id="save-status"></span>
+        <span class="header-user" id="header-user"></span>
+        <img class="header-logo" src="https://sc1911heiligenstadt.github.io/logo.svg" alt="1. SC 1911 Heiligenstadt e.V." />
+      </div>
+    </header>
+
+    <div class="bereich-switch" id="bereich-switch">
+      <button data-bereich="platz" class="active">⚽ Platzbelegung</button>
+      <button data-bereich="halle">🏀 Hallenbelegung</button>
+    </div>
+
+    <nav>
+      <button data-tab="gitter" class="active">Gitter</button>
+      <button data-tab="liste">Liste</button>
+      <div class="nav-right">
+        <button data-tab="einstellungen" class="admin-only hidden">Einstellungen</button>
+        <button data-tab="info">Info</button>
+      </div>
+    </nav>
+
+    <main>
+
+      <!-- ---------- Gitter ---------- -->
+      <section class="tab-section active" id="tab-gitter">
+        <div class="toolbar">
+          <div class="day-switch" id="day-switch"></div>
+          <div class="toolbar-right">
+            <select id="gitter-standort"><option value="">Alle Standorte</option></select>
+            <button class="btn small editor-only hidden" id="btn-new-gitter">+ Neue Belegung</button>
+          </div>
+        </div>
+        <div class="legend" id="legend"></div>
+        <div class="gueltig-hint muted" id="gueltig-hint"></div>
+        <div class="grid-scroll">
+          <div id="grid"></div>
+        </div>
+        <div class="empty-state hidden" id="gitter-empty">Für diesen Tag sind keine Belegungen erfasst.</div>
+      </section>
+
+      <!-- ---------- Liste ---------- -->
+      <section class="tab-section" id="tab-liste">
+        <div class="card">
+          <div class="filter-bar">
+            <input type="search" id="liste-search" placeholder="Suche nach Mannschaft / Kürzel…" />
+            <select id="liste-tag"><option value="">Alle Tage</option></select>
+            <select id="liste-standort"><option value="">Alle Standorte</option></select>
+            <select id="liste-kategorie"><option value="">Alle Kategorien</option></select>
+            <div class="filter-bar-end">
+              <span class="filter-count" id="liste-count"></span>
+              <button class="btn small secondary" id="btn-pdf-liste" title="Die aktuell gefilterte Liste als PDF speichern">📄 Als PDF</button>
+            </div>
+          </div>
+          <div class="list-row-header">
+            <span>Tag</span><span>Zeit</span><span>Platz</span><span>Mannschaft</span><span>Kategorie</span>
+          </div>
+          <div class="list-rows" id="liste-rows"></div>
+          <div class="empty-state hidden" id="liste-empty">Keine Belegungen gefunden.</div>
+        </div>
+        <button class="btn editor-only hidden" id="btn-new-liste">+ Neue Belegung</button>
+      </section>
+
+      <!-- ---------- Info ---------- -->
+      <section class="tab-section" id="tab-info">
+        <div class="card">
+          <h2>Über die Platzbelegung <span class="version-badge" id="version-badge-2"></span></h2>
+          <p class="muted">
+            Wochenplan der Trainingsplätze und Hallenzeiten — wer trainiert wann wo.
+            Der Reiter „Gitter“ zeigt die Woche als Raster aus Plätzen und Uhrzeiten, sodass freie
+            Zeiten sofort auffallen; „Liste“ zeigt dieselben Belegungen zum Suchen und Drucken.
+            Ein Eintrag hält Tag, Uhrzeit, Mannschaft, Kategorie, Ansprechpartner und eine Notiz fest.
+            Für den Antrag auf eine Halle beim Landkreis ist dagegen die Raumnutzung zuständig.
+          </p>
+          <div class="form-grid" id="meta-view"></div>
+          <p class="muted" id="einstellungen-user" style="margin-top:10px;"></p>
+        </div>
+        <div class="card">
+          <h2>Änderungen</h2>
+          <div id="changelog-list"></div>
+        </div>
+      
+      <div class="card" id="ds-info-karte">
+        <h2>Datenschutz</h2>
+        <p>Dieses Werkzeug gehört zu den internen Anwendungen des
+        1. SC 1911 Heiligenstadt. Die hier erfassten Daten werden
+        ausschließlich für die Vereinsarbeit verwendet und liegen auf Servern
+        in Deutschland, die ein Auftragsverarbeiter für den Verein betreibt.
+        Eine Weitergabe an Dritte findet nur statt, soweit sie für den
+        jeweiligen Zweck erforderlich oder gesetzlich vorgeschrieben ist.</p>
+        <p>Verantwortlich ist der 1. SC 1911 Heiligenstadt, Leineberg 2,
+        37308 Heilbad Heiligenstadt, Telefon 03606 612206,
+        <a href="mailto:info@sc1911-heiligenstadt.de">info@sc1911-heiligenstadt.de</a>.
+        Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung,
+        Datenübertragbarkeit und Widerspruch lassen sich unter dieser
+        Anschrift geltend machen. Beschwerden nimmt der Thüringer
+        Landesbeauftragte für den Datenschutz und die Informationsfreiheit
+        entgegen.</p>
+        <p><a href="https://www.sc1911-heiligenstadt.de/datenschutz/" target="_blank" rel="noopener">Datenschutzerklärung des Vereins</a>
+        &middot;
+        <a href="https://www.sc1911-heiligenstadt.de/impressum-2/" target="_blank" rel="noopener">Impressum</a></p>
+      </div>
+</section>
+
+      <!-- ---------- Einstellungen ---------- -->
+      <section class="tab-section" id="tab-einstellungen">
+        <div class="import-banner hidden" id="import-banner">
+          <p>Es sind noch keine Belegungen erfasst. Der bestehende Excel-Plan kann einmalig (als JSON-Datei) importiert werden.</p>
+          <button class="btn success admin-only hidden" id="btn-import-seed">Datendatei auswählen…</button>
+          <input type="file" id="import-file-input" accept="application/json" class="hidden" />
+        </div>
+
+        <div class="card admin-only hidden" id="backup-card">
+          <h2>Backups</h2>
+          <p class="muted backup-intro">
+            Ein Backup sichert den vollständigen Stand <strong>beider Bereiche</strong> — Platzbelegung und
+            Hallenbelegung. Vor einem Excel-Import und vor dem Wiederherstellen legt die App zusätzlich
+            automatisch einen Sicherungspunkt an. Es werden nie Backups von selbst gelöscht.
+          </p>
+          <div class="backup-full-hint hidden" id="backup-full-hint">
+            Alle 10 Plätze sind belegt. Zum Sichern eines neuen Standes bitte zuerst ein
+            vorhandenes Backup löschen — es wird nie eines von selbst entfernt.
+          </div>
+          <div class="backup-actions">
+            <button class="btn success" id="btn-backup-create">+ Backup erstellen</button>
+            <span class="muted" id="backup-count"></span>
+          </div>
+          <div class="backup-rows" id="backup-rows"></div>
+          <div class="empty-state hidden" id="backup-empty">Noch keine Backups vorhanden.</div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ---------- Belegungs-Formular ---------- -->
+  <div class="modal-overlay hidden" id="belegung-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="belegung-modal-title">Neue Belegung</h2>
+        <button class="modal-close" id="belegung-modal-close" aria-label="Schließen">×</button>
+      </div>
+      <div class="modal-body">
+        <form id="belegung-form">
+          <div class="form-grid">
+            <div class="form-field"><label>Tag *</label><select id="bf-tag"></select></div>
+            <div class="form-field"><label id="bf-platz-label">Platz *</label><select id="bf-platz"></select></div>
+            <div class="form-field"><label>Von *</label><input type="time" id="bf-start" step="1800" /></div>
+            <div class="form-field"><label>Bis *</label><input type="time" id="bf-ende" step="1800" /></div>
+            <!-- datalist: die Mannschaften des Vereins zur Auswahl, aber ein
+                 freier Name bleibt möglich. Auf den Plätzen steht nicht nur
+                 Mannschaftstraining — auch Kürzel wie „FZG", „1.MA" oder eine
+                 Kombination zweier Teams („D1/2") sind gültige Einträge. -->
+            <div class="form-field"><label>Mannschaft / Kürzel *</label><input type="text" id="bf-label" list="vereins-mannschaften" placeholder="z. B. D1/2, 1.MA, FZG" autocomplete="off" /><datalist id="vereins-mannschaften"></datalist></div>
+            <div class="form-field"><label>Kategorie</label><select id="bf-kategorie"></select></div>
+          </div>
+          <div class="form-field wide"><label>Ansprechpartner</label><input type="text" id="bf-ansprechpartner" placeholder="optional" /></div>
+          <div class="form-field wide"><label>Notiz</label><input type="text" id="bf-notiz" placeholder="optional" /></div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn danger hidden" id="btn-delete-belegung">Löschen</button>
+        <div class="btn-row">
+          <button class="btn secondary" id="btn-cancel-belegung">Abbrechen</button>
+          <button class="btn success" id="btn-save-belegung">Speichern</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------- Backup erstellen ---------- -->
+  <div class="modal-overlay hidden" id="backup-modal">
+    <div class="modal modal-small">
+      <div class="modal-header">
+        <h2>Backup erstellen</h2>
+        <button class="modal-close" id="backup-modal-close" aria-label="Schließen">×</button>
+      </div>
+      <div class="modal-body">
+        <p class="muted" id="backup-modal-info"></p>
+        <div class="form-field wide">
+          <label>Kommentar</label>
+          <input type="text" id="bk-kommentar" maxlength="120" placeholder="z. B. Stand vor der Winterplanung" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-row">
+          <button class="btn secondary" id="btn-cancel-backup">Abbrechen</button>
+          <button class="btn success" id="btn-confirm-backup">Backup erstellen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="config.js?v=1.0"></script>
+  <script src="db.js?v=1.0"></script>
+  <script src="app.js?v=1.0"></script>
+</body>
+</html>
