@@ -168,19 +168,19 @@
       <div class="modal-body">
         <form id="belegung-form">
           <div class="form-grid">
-            <div class="form-field"><label>Tag *</label><select id="bf-tag"></select></div>
-            <div class="form-field"><label id="bf-platz-label">Platz *</label><select id="bf-platz"></select></div>
-            <div class="form-field"><label>Von *</label><input type="time" id="bf-start" step="1800" /></div>
-            <div class="form-field"><label>Bis *</label><input type="time" id="bf-ende" step="1800" /></div>
+            <div class="form-field"><label for="bf-tag">Tag *</label><select id="bf-tag"></select></div>
+            <div class="form-field"><label for="bf-platz" id="bf-platz-label">Platz *</label><select id="bf-platz"></select></div>
+            <div class="form-field"><label for="bf-start">Von *</label><input type="time" id="bf-start" step="1800" /></div>
+            <div class="form-field"><label for="bf-ende">Bis *</label><input type="time" id="bf-ende" step="1800" /></div>
             <!-- datalist: die Mannschaften des Vereins zur Auswahl, aber ein
                  freier Name bleibt möglich. Auf den Plätzen steht nicht nur
                  Mannschaftstraining — auch Kürzel wie „FZG", „1.MA" oder eine
                  Kombination zweier Teams („D1/2") sind gültige Einträge. -->
-            <div class="form-field"><label>Mannschaft / Kürzel *</label><input type="text" id="bf-label" list="vereins-mannschaften" placeholder="z. B. D1/2, 1.MA, FZG" autocomplete="off" /><datalist id="vereins-mannschaften"></datalist></div>
-            <div class="form-field"><label>Kategorie</label><select id="bf-kategorie"></select></div>
+            <div class="form-field"><label for="bf-label">Mannschaft / Kürzel *</label><input type="text" id="bf-label" list="vereins-mannschaften" placeholder="z. B. D1/2, 1.MA, FZG" autocomplete="off" /><datalist id="vereins-mannschaften"></datalist></div>
+            <div class="form-field"><label for="bf-kategorie">Kategorie</label><select id="bf-kategorie"></select></div>
           </div>
-          <div class="form-field wide"><label>Ansprechpartner</label><input type="text" id="bf-ansprechpartner" placeholder="optional" /></div>
-          <div class="form-field wide"><label>Notiz</label><input type="text" id="bf-notiz" placeholder="optional" /></div>
+          <div class="form-field wide"><label for="bf-ansprechpartner">Ansprechpartner</label><input type="text" id="bf-ansprechpartner" placeholder="optional" /></div>
+          <div class="form-field wide"><label for="bf-notiz">Notiz</label><input type="text" id="bf-notiz" placeholder="optional" /></div>
         </form>
       </div>
       <div class="modal-footer">
@@ -203,7 +203,7 @@
       <div class="modal-body">
         <p class="muted" id="backup-modal-info"></p>
         <div class="form-field wide">
-          <label>Kommentar</label>
+          <label for="bk-kommentar">Kommentar</label>
           <input type="text" id="bk-kommentar" maxlength="120" placeholder="z. B. Stand vor der Winterplanung" />
         </div>
       </div>
