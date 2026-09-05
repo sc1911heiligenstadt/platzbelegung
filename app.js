@@ -147,17 +147,51 @@ function renderGrid() {
   const slotCount = Math.max(1, Math.round((endMin - startMin) / SLOT_MIN));
 
   // pro Ort: welche Belegung startet in Slot i, und welche Slots sind überdeckt
+  //
+  // ⚠️ covered wird AUS startMap abgeleitet, nicht aus allen Belegungen.
+  // Zwei Belegungen auf demselben Platz, die sich zeitlich überschneiden, sind
+  // erlaubt (saveBelegung fragt nur nach). startMap hält je Startslot aber nur
+  // EINE — die zuletzt eingelesene. Trug covered die Slots BEIDER ein, meldete
+  // es mehr überdeckte Zeilen, als das gerenderte rowspan überspannt: für diese
+  // Zeilen kam gar keine Zelle heraus, und weil eine HTML-Tabelle Zellen von
+  // links auffüllt, rutschten alle Zellen rechts davon eine Spalte nach links.
+  // Belegungen standen dann unter dem falschen Platz, ohne jeden Hinweis.
   const startMap = {}, covered = {};
   orte.forEach((p) => { startMap[p.id] = {}; covered[p.id] = new Set(); });
   bookings.forEach((b) => {
     const s = timeToMin(b.start), e = timeToMin(b.ende);
     if (s == null || e == null || e <= s) return;
     const si = Math.round((s - startMin) / SLOT_MIN);
-    const span = Math.round((e - s) / SLOT_MIN);
+    // Unter einem halben Slot wäre span 0 — rowspan="0" heißt in HTML "bis zum
+    // Ende der Gruppe" und risse dieselbe Lücke auf.
+    const span = Math.max(1, Math.round((e - s) / SLOT_MIN));
     const ortId = b[ortsField];
     if (!startMap[ortId]) return;
     startMap[ortId][si] = { b, span };
-    for (let k = si + 1; k < si + span; k++) covered[ortId].add(k);
+  });
+  // Zweiter Durchgang: überdeckt ist nur, was ein tatsächlich gerenderter
+  // Eintrag überspannt. Damit passen rowspan und covered immer zusammen.
+  orte.forEach((p) => {
+    Object.keys(startMap[p.id]).forEach((k) => {
+      const si = Number(k), span = startMap[p.id][k].span;
+      for (let j = si + 1; j < si + span; j++) covered[p.id].add(j);
+    });
+  });
+
+  // Was das Gitter nicht zeigen kann, soll wenigstens nicht spurlos
+  // verschwinden: je Zelle wird vermerkt, welche Belegung in derselben Zeit
+  // noch auf dem Platz liegt.
+  const gezeigt = new Set();
+  orte.forEach((p) => {
+    Object.keys(startMap[p.id]).forEach((k) => {
+      if (!covered[p.id].has(Number(k))) gezeigt.add(startMap[p.id][k].b.id);
+    });
+  });
+  const versteckt = {};
+  orte.forEach((p) => { versteckt[p.id] = []; });
+  bookings.forEach((b) => {
+    if (gezeigt.has(b.id)) return;
+    if (versteckt[b[ortsField]]) versteckt[b[ortsField]].push(b);
   });
 
   let html = '<table class="grid-table"><thead><tr><th class="col-time">Zeit</th>';
@@ -174,7 +208,18 @@ function renderGrid() {
         const kat = kategorieById(entry.b.kategorie);
         const bg = kat ? kat.farbe : "#e9ecef";
         const fg = contrastColor(bg);
-        html += `<td class="slot-booking" rowspan="${entry.span}" style="background:${escapeHtml(bg)};color:${fg}" data-id="${escapeHtml(entry.b.id)}" draggable="true" title="${escapeHtml(entry.b.start + "–" + entry.b.ende + " · " + p.name)}">${escapeHtml(entry.b.label)}</td>`;
+        const es = timeToMin(entry.b.start), ee = timeToMin(entry.b.ende);
+        const auch = versteckt[p.id].filter((x) => {
+          const xs = timeToMin(x.start), xe = timeToMin(x.ende);
+          return xs != null && xe != null && xs < ee && es < xe;
+        });
+        const titel = entry.b.start + "–" + entry.b.ende + " · " + p.name
+          + (auch.length
+            ? "\n+ " + auch.length + (auch.length > 1 ? " weitere Belegungen" : " weitere Belegung")
+              + " in dieser Zeit: " + auch.map((x) => x.label + " (" + x.start + "–" + x.ende + ")").join(", ")
+            : "");
+        const marke = auch.length ? ` <span class="slot-mehr">+${auch.length}</span>` : "";
+        html += `<td class="slot-booking" rowspan="${entry.span}" style="background:${escapeHtml(bg)};color:${fg}" data-id="${escapeHtml(entry.b.id)}" draggable="true" title="${escapeHtml(titel)}">${escapeHtml(entry.b.label)}${marke}</td>`;
       } else {
         html += `<td class="slot-free" data-ort="${escapeHtml(p.id)}" data-slotmin="${slotMin}"></td>`;
       }

@@ -62,6 +62,20 @@ const DEFAULT_KATEGORIEN = [
 
 const APP_CHANGELOG = [
   {
+    version: "1.1",
+    groups: [
+      {
+        title: "Das Gitter verrutscht nicht mehr",
+        items: [
+          "Wenn sich zwei Belegungen auf demselben Platz zeitlich überschneiden, steht ab jetzt jede Belegung wieder unter dem richtigen Platz.",
+          "Vorher rutschten in so einem Fall alle Belegungen rechts davon eine Spalte nach links, und die letzte Spalte fiel ganz weg. Der Wochenplan sah dabei völlig normal aus — man hatte keinen Anhaltspunkt, dass er falsch ist. Ausgelöst hat es der Alltagsfall: jemand trägt nachträglich etwas Kürzeres in dieselbe Zeit ein.",
+          "Die Belegung, die das Gitter nicht zeigen kann, ist jetzt an der Zelle als „+1“ vermerkt. Zeigt man mit der Maus darauf, steht ihr Name und ihre Zeit da.",
+          "Eine Belegung unter einer halben Stunde belegt jetzt eine Zeile statt den Rest der Spalte."
+        ]
+      }
+    ]
+  },
+  {
     version: "1.0",
     groups: [
       {

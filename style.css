@@ -232,6 +232,17 @@ td.slot-booking {
   border-radius: 6px;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35);
 }
+/* "+2" an einer Zelle: auf diesem Platz liegt in derselben Zeit noch etwas,
+   das das Gitter nicht zeigen kann. Die Namen stehen im Tooltip der Zelle. */
+td.slot-booking .slot-mehr {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  opacity: 0.75;
+  padding: 0 3px;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px currentColor;
+}
 td.slot-booking { cursor: pointer; }
 body.can-edit td.slot-booking[draggable="true"] { cursor: grab; }
 td.slot-booking.is-dragging { opacity: 0.4; }
