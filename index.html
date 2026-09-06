@@ -52,7 +52,7 @@
         <div class="toolbar">
           <div class="day-switch" id="day-switch"></div>
           <div class="toolbar-right">
-            <select id="gitter-standort"><option value="">Alle Standorte</option></select>
+            <select id="gitter-standort" aria-label="Gitter nach Standort filtern"><option value="">Alle Standorte</option></select>
             <button class="btn small editor-only hidden" id="btn-new-gitter">+ Neue Belegung</button>
           </div>
         </div>
@@ -69,9 +69,9 @@
         <div class="card">
           <div class="filter-bar">
             <input type="search" id="liste-search" placeholder="Suche nach Mannschaft / Kürzel…" />
-            <select id="liste-tag"><option value="">Alle Tage</option></select>
-            <select id="liste-standort"><option value="">Alle Standorte</option></select>
-            <select id="liste-kategorie"><option value="">Alle Kategorien</option></select>
+            <select id="liste-tag" aria-label="Liste nach Tag filtern"><option value="">Alle Tage</option></select>
+            <select id="liste-standort" aria-label="Liste nach Standort filtern"><option value="">Alle Standorte</option></select>
+            <select id="liste-kategorie" aria-label="Liste nach Kategorie filtern"><option value="">Alle Kategorien</option></select>
             <div class="filter-bar-end">
               <span class="filter-count" id="liste-count"></span>
               <button class="btn small secondary" id="btn-pdf-liste" title="Die aktuell gefilterte Liste als PDF speichern">📄 Als PDF</button>
@@ -132,7 +132,7 @@
         <div class="import-banner hidden" id="import-banner">
           <p>Es sind noch keine Belegungen erfasst. Der bestehende Excel-Plan kann einmalig (als JSON-Datei) importiert werden.</p>
           <button class="btn success admin-only hidden" id="btn-import-seed">Datendatei auswählen…</button>
-          <input type="file" id="import-file-input" accept="application/json" class="hidden" />
+          <input type="file" id="import-file-input" aria-label="Datendatei auswählen" accept="application/json" class="hidden" />
         </div>
 
         <div class="card admin-only hidden" id="backup-card">
