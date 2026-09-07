@@ -452,8 +452,24 @@ function renderMeta() {
   hint.textContent = m.gueltigAb ? `Gültig ab ${isoToDisplay(m.gueltigAb)}${m.saison ? " · Saison " + m.saison : ""}` : "";
 }
 
+// Was die App kann. Quelle: APP_FUNKTIONEN in config.js — bewusst getrennt vom
+// Changelog: Hier steht der Zustand, dort die Historie.
+function renderFunktionen() {
+  const container = document.getElementById("funktionen-list");
+  if (!container) return;
+  container.innerHTML = APP_FUNKTIONEN.map((g) => `
+    <div class="changelog-group">
+      <div class="cg-title">${escapeHtml(g.title)}</div>
+      <ul class="cg-items">${g.items.map((i) => `<li>${escapeHtml(i)}</li>`).join("")}</ul>
+    </div>`).join("");
+}
+
+// Der Changelog wird seit 07.09.2026 nicht mehr angezeigt — die Karte
+// „Änderungen“ ist aus dem Info-Reiter raus, ebenso die Versionspille.
+// APP_CHANGELOG bleibt gepflegt (Quelle für die große Anleitung und die
+// Neuigkeiten der Tools-Übersicht), deshalb bleibt auch dieser Renderer stehen.
+// Er findet seinen Container nur nicht mehr und tut dann nichts.
 function renderVersionInfo() {
-  document.querySelectorAll("#version-badge, #version-badge-2").forEach((el) => { if (el) el.textContent = "v" + APP_VERSION; });
   const list = document.getElementById("changelog-list");
   if (!list) return;
   list.innerHTML = APP_CHANGELOG.map((entry) => `
@@ -520,6 +536,7 @@ function renderAll() {
   renderGrid();
   renderListe();
   renderMeta();
+  renderFunktionen();
   renderVersionInfo();
   renderBackups();
   document.getElementById("import-banner").classList.toggle("hidden", belegungsListe().length > 0 || !canAdmin());
@@ -893,7 +910,7 @@ function switchTab(tab) {
   document.querySelectorAll(".tab-section").forEach((s) => s.classList.toggle("active", s.id === "tab-" + tab));
   if (tab === "gitter") renderGrid();
   if (tab === "liste") renderListe();
-  if (tab === "info") { renderMeta(); renderVersionInfo(); }
+  if (tab === "info") { renderMeta(); renderFunktionen(); renderVersionInfo(); }
   if (tab === "einstellungen") renderBackups();
 }
 

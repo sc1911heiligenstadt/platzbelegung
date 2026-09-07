@@ -325,6 +325,7 @@ td.slot-free.drop-target { background: var(--blue-light); box-shadow: inset 0 0 
 .card .version-badge { background: var(--blue-light); border-color: var(--blue-light); color: var(--blue); }
 
 #changelog-list { display: flex; flex-direction: column; gap: 8px; }
+#funktionen-list { display: flex; flex-direction: column; gap: 18px; font-size: 13px; }
 .changelog-entry { display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
 .changelog-entry .cv { font-weight: 700; color: var(--blue); }
 .changelog-group { display: flex; flex-direction: column; gap: 4px; }

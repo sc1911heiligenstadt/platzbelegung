@@ -60,7 +60,118 @@ const DEFAULT_KATEGORIEN = [
   { id: "frei", name: "Freie Zeit", farbe: "#e9ecef" }
 ];
 
+// Was die Platzbelegung kann -- steht im Info-Reiter als Karte "Funktionen".
+// WICHTIG: Das ist NICHT der Changelog. Hier steht der ZUSTAND ("Belegungen
+// lassen sich ziehen"), dort die Aenderung. Wer eine Funktion umbaut oder
+// abschaltet, zieht diesen Text mit -- und ebenso die grosse Anleitung, wo
+// dasselbe ausfuehrlich steht.
+const APP_FUNKTIONEN = [
+  {
+    title: "Wofür die Platzbelegung da ist",
+    items: [
+      "Der Wochenplan der Trainingsplätze und Hallenzeiten — wer nutzt wann welchen Platz und welche Halle.",
+      "Zwei getrennte Bereiche mit eigenem Gitter, eigener Liste und eigenem Import: die Platzbelegung mit 14 Plätzen (Hauptplatz sowie Kalteneber, Rengelrode und Günterode) und die Hallenbelegung mit den 6 Hallen der Stadt.",
+      "Über der Woche stehen Saison und Gültig-ab-Datum des geladenen Plans."
+    ]
+  },
+  {
+    title: "Der Wochenplan als Gitter",
+    items: [
+      "Der Reiter „Gitter“ zeigt die Woche von Montag bis Samstag als Raster aus Uhrzeit und Platz beziehungsweise Halle, farbig nach Kategorie — freie Zeiten fallen dadurch sofort auf.",
+      "Ein Standort-Filter trennt den Hauptplatz von den Außenstandorten.",
+      "Ein Klick auf eine Belegung zeigt alle Angaben samt Ansprechpartner und Notiz. Das steht auch ohne Bearbeiten-Recht offen.",
+      "Passen zwei sich überschneidende Belegungen nicht nebeneinander, steht an der Zelle ein „+1“; der Mauszeiger darauf nennt Name und Zeit."
+    ]
+  },
+  {
+    title: "Die Terminliste",
+    items: [
+      "Der Reiter „Liste“ zeigt dieselben Belegungen als Termine, filterbar nach Tag, Standort, Kategorie und freier Textsuche.",
+      "Am Handy ist das die bequemere Ansicht als das Gitter.",
+      "Auch hier führt ein Klick auf eine Belegung zu allen Angaben."
+    ]
+  },
+  {
+    title: "Belegungen pflegen",
+    items: [
+      "Anlegen, ändern und löschen über ein Formular mit Tag, Platz oder Halle, Start und Ende, Kürzel, Ansprechpartner, Kategorie und Notiz.",
+      "Ein Tippen auf ein freies Feld im Gitter legt direkt eine Belegung für diesen Platz und diese Zeit an.",
+      "Bestehende Belegungen lassen sich im Gitter auf ein freies Feld ziehen. Ist das Ziel belegt, lehnt die App den Zug ab.",
+      "Überschneidet sich die Zeit mit einer bestehenden Belegung, warnt die App und fragt nach, statt stillschweigend zu speichern."
+    ]
+  },
+  {
+    title: "Mannschaften aus der einen Vereinsliste",
+    items: [
+      "Das Feld „Mannschaft / Kürzel“ schlägt beim Tippen die echten Mannschaften des Vereins vor — dieselbe Liste, die in der Tools-Übersicht gepflegt wird.",
+      "Damit steht dieselbe Mannschaft überall gleich geschrieben im Plan, statt einmal als „D1“ und einmal als „D-Junioren“.",
+      "Ein eigener Eintrag bleibt möglich: Kürzel wie „FZG“ oder Kombinationen wie „D1/2“ lassen sich frei eintippen."
+    ]
+  },
+  {
+    title: "Liste als PDF",
+    items: [
+      "Die Terminliste lässt sich als PDF sichern — genau in dem Umfang, den der eingestellte Filter zeigt; welcher Filter das war, steht als Untertitel darin.",
+      "Gegliedert nach Wochentagen, mit den Farben der Kategorien und dem Vereinsnamen in der Fußzeile.",
+      "Der Dateiname trägt Bereich, gewählten Tag und Datum, etwa „Platzbelegung_Montag_2026-07-23.pdf“."
+    ]
+  },
+  {
+    title: "Sicherungen und Import",
+    items: [
+      "Im Reiter „Einstellungen“ lassen sich bis zu 10 Sicherungen anlegen, jede mit dem vollständigen Stand beider Bereiche und einem Kommentar.",
+      "Jeder gesicherte Stand lässt sich zurückholen. Die Liste zeigt Zeitpunkt, wer gesichert hat, den Kommentar und die Zahl der Belegungen.",
+      "Vor einem Import und vor dem Zurückholen legt die App von sich aus einen Sicherungspunkt an. Gelöscht wird nie eine Sicherung von selbst — sind alle 10 Plätze belegt, wartet die App, bis eine von Hand entfernt wurde.",
+      "Ein bestehender Excel-Plan lässt sich je Bereich einmalig einlesen. Sind schon Belegungen erfasst, fragt die App nach, bevor sie sie ersetzt."
+    ]
+  },
+  {
+    title: "Am Handy",
+    items: [
+      "Die Ansicht ist für das Handy gebaut; die gefilterte Terminliste ist dort die bequemere Ansicht.",
+      "Eingabefelder sind groß genug, dass der iPhone-Browser beim Antippen nicht ungefragt in die Seite hineinzoomt.",
+      "Das Verschieben einer Belegung per Ziehen braucht eine Maus; am Handy geht es über das Formular."
+    ]
+  },
+  {
+    title: "Wer darf was",
+    items: [
+      "Sehen: Gitter, Liste und alle Angaben einer Belegung, schreibgeschützt — dazu das PDF der gefilterten Liste. Das steht jedem angemeldeten Nutzer offen.",
+      "Bearbeiten: Belegungen anlegen, ändern, löschen und verschieben.",
+      "Administrieren: zusätzlich Datei-Import und Sicherungen im Reiter „Einstellungen“.",
+      "Fällt die Anmeldung weg, während die App offen ist, räumt sie den Bildschirm samt der Dialoge daneben. Der Reiter „Info“ bleibt für alle sichtbar."
+    ]
+  },
+  {
+    title: "Nicht zu verwechseln",
+    items: [
+      "Hier stehen die eigenen Trainingszeiten des Vereins.",
+      "Der Antrag auf Nutzung einer Halle beim Landkreis läuft über die Raumnutzung — anderes Werkzeug, anderer Zweck."
+    ]
+  },
+  {
+    title: "Daten und Speicherung",
+    items: [
+      "Gespeichert wird in der Vereins-Nextcloud über die zentrale Anmeldung der Tools-Übersicht — ein eigenes Passwort braucht es nicht.",
+      "Ändern zwei Geräte gleichzeitig denselben Stand, erkennt die App das, lädt den fremden Stand nach und sagt Bescheid."
+    ]
+  }
+];
+
 const APP_CHANGELOG = [
+  {
+    version: "1.2",
+    groups: [
+      {
+        title: "Im Info-Reiter steht jetzt, was die App kann",
+        items: [
+          "Die Liste der Änderungen und die Versionsnummer sind aus dem Info-Reiter verschwunden.",
+          "Stattdessen steht dort die Karte „Funktionen“: was die App kann, nach Themen geordnet.",
+          "Was sich geändert hat, steht weiterhin in den Neuigkeiten auf der Startseite der Tools-Übersicht."
+        ]
+      }
+    ]
+  },
   {
     version: "1.1",
     groups: [
